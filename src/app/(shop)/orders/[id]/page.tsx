@@ -1,4 +1,4 @@
-import Link from 'next/link';
+
 
 import { Title } from '@/components';
 import { initialData } from '@/seed/seed';
@@ -21,7 +21,7 @@ interface Props {
 }
 
 
-export default function ( { params }: Props ) {
+export default function OrderPagesId( { params }: Props ) {
 
   const { id } = params;
 
