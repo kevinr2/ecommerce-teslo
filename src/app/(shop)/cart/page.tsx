@@ -4,16 +4,11 @@ import Link from 'next/link';
 
 
 import {  Title } from '@/components';
-import { initialData } from '@/seed/seed';
+
 import { ProductInCart } from './ui/ProductInCart';
 import { OrderSummary } from './ui/OrderSummary';
 
 
-const productsInCart = [
-  initialData.products[ 0 ],
-  initialData.products[ 1 ],
-  initialData.products[ 2 ],
-];
 
 
 export default function CartPage() {
@@ -51,8 +46,8 @@ export default function CartPage() {
           {/* Checkout - Resumen de orden */ }
           <div className="bg-white rounded-xl shadow-xl p-7 h-fit">
             <h2 className="text-2xl mb-2">Resumen de orden</h2>
-
-              <OrderSummary />
+            <OrderSummary />
+              
 
             <div className="mt-5 mb-2 w-full">
               <Link 

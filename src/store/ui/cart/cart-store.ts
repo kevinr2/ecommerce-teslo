@@ -1,19 +1,20 @@
+import type { CartProduct } from "@/interfaces";
 import { create } from "zustand";
-import type { CartProduct } from "../../../interfaces/product.interface";
 import { persist } from "zustand/middleware";
 
 interface State {
   cart: CartProduct[];
+
   getTotalItems: () => number;
   getSummaryInformation: () => {
-    subsTotal: number;
+    subTotal: number;
     tax: number;
     total: number;
-    itemCart: number;
+    itemsInCart: number;
   };
 
   addProductTocart: (product: CartProduct) => void;
-  updateProductQuantify: (product: CartProduct, quantify: number) => void;
+  updateProductQuantity: (product: CartProduct, quantity: number) => void;
   removeProduct: (product: CartProduct) => void;
 }
 
@@ -22,71 +23,84 @@ export const useCartStore = create<State>()(
     (set, get) => ({
       cart: [],
 
+      // Methods
       getTotalItems: () => {
         const { cart } = get();
-        cart.filter((item) => item.price > 100);
-
         return cart.reduce((total, item) => total + item.quantity, 0);
+      },
+
+      getSummaryInformation: () => {
+        const { cart } = get();
+
+        const subTotal = cart.reduce(
+          (subTotal, product) => product.quantity * product.price + subTotal,
+          0
+        );
+        const tax = subTotal * 0.15;
+        const total = subTotal + tax;
+        const itemsInCart = cart.reduce(
+          (total, item) => total + item.quantity,
+          0
+        );
+
+        return {
+          subTotal,
+          tax,
+          total,
+          itemsInCart,
+        };
       },
 
       addProductTocart: (product: CartProduct) => {
         const { cart } = get();
 
+        // 1. Revisar si el producto existe en el carrito con la talla seleccionada
         const productInCart = cart.some(
           (item) => item.id === product.id && item.size === product.size
         );
+
         if (!productInCart) {
           set({ cart: [...cart, product] });
           return;
         }
-        const updatedCartProduct = cart.map((item) => {
+
+        // 2. Se que el producto existe por talla... tengo que incrementar
+        const updatedCartProducts = cart.map((item) => {
           if (item.id === product.id && item.size === product.size) {
             return { ...item, quantity: item.quantity + product.quantity };
           }
+
           return item;
         });
 
-        set({ cart: updatedCartProduct });
+        set({ cart: updatedCartProducts });
       },
-      updateProductQuantify(product: CartProduct, quantify: number) {
+
+      updateProductQuantity: (product: CartProduct, quantity: number) => {
         const { cart } = get();
-        const updateCarProduct = cart.map((item) => {
+
+        const updatedCartProducts = cart.map((item) => {
           if (item.id === product.id && item.size === product.size) {
-            return { ...item, quantity: quantify };
+            return { ...item, quantity: quantity };
           }
           return item;
         });
-        set({ cart: updateCarProduct });
-      },
-      getSummaryInformation : ()=> {
-        const { cart } = get();
-        const subsTotal = cart.reduce(
-          (subtotal, product) => product.quantity * product.price + subtotal,
-          0
-        );
 
-        const tax = subsTotal * 0.15;
-        const total = subsTotal + tax;
-        const itemCart = cart.reduce((total, item) => total + item.quantity, 0);
-
-        return {
-          subsTotal,
-          tax,
-          total,
-          itemCart,
-        };
+        set({ cart: updatedCartProducts });
       },
-      removeProduct(product: CartProduct) {
+
+      removeProduct: (product: CartProduct) => {
         const { cart } = get();
-        const updateCartProduct = cart.filter(
+        const updatedCartProducts = cart.filter(
           (item) => item.id !== product.id || item.size !== product.size
         );
 
-        set({ cart: updateCartProduct });
+        set({ cart: updatedCartProducts });
       },
     }),
+
     {
-      name: "shopping-cart",
+      name: "shopping-cart"
     }
   )
 );

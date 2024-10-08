@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { IoSearchOutline, IoCartOutline } from 'react-icons/io5';
 
-import { titleFont } from '@/config/fonts';
+
 import { useUIStore } from '@/store';
 import { useCartStore } from '../../../store/ui/cart/cart-store';
 import { useEffect, useState } from 'react';
@@ -26,7 +26,7 @@ export const TopMenu = () => {
       <div>
         <Link
           href="/">
-          <span className={ `${ titleFont.className } antialiased font-bold` } >Teslo</span>
+          <span className={ `` } >Teslo</span>
           <span> | Shop</span>
         </Link>
       </div>

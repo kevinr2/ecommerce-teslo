@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 export const ProductInCart = () => {
     const removeProduct = useCartStore(state => state.removeProduct)
-    const updateProductQuantity = useCartStore( state=> state.updateProductQuantify)
+    const updateProductQuantity = useCartStore( state=> state.updateProductQuantity)
     const [loaded, setLoaded] = useState(false)
     const productsInCart = useCartStore(state =>state.cart)
 
