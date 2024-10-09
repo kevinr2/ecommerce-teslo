@@ -17,6 +17,14 @@ export const OrderSummary = () => {
   useEffect(() => {
     setLoaded(true);
   }, []);
+  useEffect(() => {
+
+    if ( itemsInCart === 0 && loaded === true )   {
+      router.replace('/empty')
+    }
+
+
+  },[ itemsInCart, loaded ])
 
   if (!loaded) return <p>Loading...</p>;
 
