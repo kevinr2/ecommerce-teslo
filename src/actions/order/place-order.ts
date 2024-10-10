@@ -16,7 +16,7 @@ export const placeOrder = async (
 ) => {
   const session = await auth();
   const userId = session?.user.id;
-
+    
   // Verificar sesión de usuario
   if (!userId) {
     return {

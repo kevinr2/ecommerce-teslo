@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from 'next/navigation';
 import clsx from 'clsx';
 
@@ -18,11 +18,13 @@ export const PlaceOrder = () => {
 
 
   const address = useAddressStore((state) => state.address);
+  const { cart, getSummaryInformation } = useCartStore();
 
-  const { itemsInCart, subTotal, tax, total } = useCartStore((state) =>
-    state.getSummaryInformation()
+  const { itemsInCart, subTotal, tax, total } = useMemo(
+    () => getSummaryInformation(),
+    [cart]
   );
-  const cart = useCartStore( state => state.cart );
+
   const clearCart = useCartStore( state => state.clearCart );
 
   useEffect(() => {
@@ -47,17 +49,12 @@ export const PlaceOrder = () => {
       setIsPlacingOrder(false);
       setErrorMessage(resp.message);
       return;
-    }
-
+    } 
+ 
     //* Todo salio bien!
     clearCart();
-    router.replace('/orders/' + resp.order?.id );
-
-
+    router.replace('/orders/' + resp.order?.id ); 
   }
-
-
-
 
   if (!loaded) {
     return <p>Cargando...</p>;
