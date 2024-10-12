@@ -13,14 +13,14 @@ export const StrockLabel = ({ slug }: Props) => {
   const [isloading, setIsloading] = useState(true);
 
   useEffect(() => {
+    const getStock = async () => {
+      const inStock = await getStockByslug(slug);
+      setStock(inStock);
+      setIsloading(false)
+    };
     getStock();
-  }, []);
+  }, [slug]);
 
-  const getStock = async () => {
-    const inStock = await getStockByslug(slug);
-    setStock(inStock);
-    setIsloading(false)
-  };
 
   return (
     <>

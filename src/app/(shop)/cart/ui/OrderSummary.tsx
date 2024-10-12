@@ -5,27 +5,26 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 export const OrderSummary = () => {
+  
   const router = useRouter();
-
-  const { cart, getSummaryInformation } = useCartStore();
+  const {  getSummaryInformation } = useCartStore();
   const [loaded, setLoaded] = useState(false);
 
   const { itemsInCart, subTotal, tax, total } = useMemo(
     () => getSummaryInformation(),
-    [cart]
+    [getSummaryInformation] 
   );
   useEffect(() => {
     setLoaded(true);
   }, []);
   useEffect(() => {
-
+    
     if ( itemsInCart === 0 && loaded === true )   {
       router.replace('/empty')
     }
 
-
-  },[ itemsInCart, loaded ])
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
+  },[ itemsInCart, loaded,router ])
   if (!loaded) return <p>Loading...</p>;
 
   return (

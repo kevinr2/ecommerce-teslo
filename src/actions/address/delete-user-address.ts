@@ -12,7 +12,7 @@ export const deleteUserAddress = async( userId: string ) => {
       where: { userId }
     });
 
-    return { ok: true };
+    return { ok: true ,delete:deleted};
     
   } catch (error) {
     console.log(error);

@@ -22,7 +22,7 @@ export const PlaceOrder = () => {
 
   const { itemsInCart, subTotal, tax, total } = useMemo(
     () => getSummaryInformation(),
-    [cart]
+    [getSummaryInformation]
   );
 
   const clearCart = useCartStore( state => state.clearCart );
@@ -43,11 +43,11 @@ export const PlaceOrder = () => {
     }))
 
 
-    //! Server Action
+ 
     const resp = await placeOrder( productsToOrder, address);
     if ( !resp.ok ) {
       setIsPlacingOrder(false);
-      setErrorMessage(resp.message);
+      setErrorMessage(resp.message ?? "");
       return;
     } 
  

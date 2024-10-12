@@ -27,7 +27,7 @@ export const Sidebar = () => {
 
   const logoutUSer = ()=>{
     logout()
-    window.location.reload()
+    window.location.replace("/")
   }
 
   return (
@@ -77,30 +77,30 @@ export const Sidebar = () => {
             <Link
               href="/profile"
               onClick={() => closeMenu()}
-              className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+              className="flex items-center mt-5 p-2 hover:bg-gray-100 rounded transition-all"
             >
-              <IoPersonOutline size={30} />
-              <span className="ml-3 text-xl">Perfil</span>
+              <IoPersonOutline size={20} />
+              <span className="ml-3 text-lg">Perfil</span>
             </Link>
 
             <Link
               href="/orders"
               onClick={() => closeMenu()}
-              className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+              className="flex items-center mt-5 p-2 hover:bg-gray-100 rounded transition-all"
             >
-              <IoTicketOutline size={30} />
-              <span className="ml-3 text-xl">Ordenes</span>
+              <IoTicketOutline size={20} />
+              <span className="ml-3 text-lg">Ordenes</span>
             </Link>
           </>
         )}
 
         {isAuthenticated && (
           <button
-            className="flex w-full items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+            className="flex w-full items-center mt-5 p-2 hover:bg-gray-100 rounded transition-all"
             onClick={logoutUSer}
           >
-            <IoLogOutOutline size={30} />
-            <span className="ml-3 text-xl">Salir</span>
+            <IoLogOutOutline size={20} />
+            <span className="ml-3 text-lg">Salir</span>
           </button>
         )}
 
@@ -110,8 +110,8 @@ export const Sidebar = () => {
             className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
             onClick={() => closeMenu()}
           >
-            <IoLogInOutline size={30} />
-            <span className="ml-3 text-xl">Ingresar</span>
+            <IoLogInOutline size={20} />
+            <span className="ml-3 text-lg">Ingresar</span>
           </Link>
         )}
 
@@ -121,27 +121,30 @@ export const Sidebar = () => {
             <div className="w-full h-px bg-gray-200 my-10" />
 
             <Link
-              href="/"
-              className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+              href="/admin/products"
+              onClick={() => closeMenu()}
+              className="flex items-center mt-5 p-2 hover:bg-gray-100 rounded transition-all"
             >
-              <IoShirtOutline size={30} />
-              <span className="ml-3 text-xl">Productos</span>
+              <IoShirtOutline size={20} />
+              <span className="ml-3 text-lg">Productos</span>
             </Link>
 
             <Link
-              href="/"
-              className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+              href="/admin/orders"
+              className="flex items-center mt-5 p-2 hover:bg-gray-100 rounded transition-all"
+              onClick={() => closeMenu()}
             >
-              <IoTicketOutline size={30} />
-              <span className="ml-3 text-xl">Ordenes</span>
+              <IoTicketOutline size={20} />
+              <span className="ml-3 text-lg">Ordenes</span>
             </Link>
 
             <Link
-              href="/"
-              className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+              href="/admin/users"
+              onClick={() => closeMenu()}
+              className="flex items-center mt-5 p-2 hover:bg-gray-100 rounded transition-all"
             >
-              <IoPeopleOutline size={30} />
-              <span className="ml-3 text-xl">Usuarios</span>
+              <IoPeopleOutline size={20} />
+              <span className="ml-3 text-lg">Usuarios</span>
             </Link>
           </>
         )}

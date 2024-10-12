@@ -3,10 +3,10 @@ export const revalidate = 604800 //7 dias
 import { notFound } from 'next/navigation';
 
 import { titleFont } from '@/config/fonts';
-import { ProductMobileSlideshow, ProductSlideshow, QuantitySelector, SizeSelector } from '@/components';
+import { ProductMobileSlideshow, ProductSlideshow } from '@/components';
 import { getProductBySlug } from '@/actions/product/get-product-by-slug';
 import { StrockLabel } from '@/components/product/stock-label/StrockLabel';
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
 import { AddTocart } from './ui/AddTocart';
 
 
@@ -17,7 +17,7 @@ interface Props {
 }
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata
+  
 ): Promise<Metadata> {
   // read route params
   const slug = params.slug

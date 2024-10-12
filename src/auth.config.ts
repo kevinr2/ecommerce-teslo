@@ -1,9 +1,10 @@
 import NextAuth  ,{ type NextAuthConfig } from 'next-auth';
-
 import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
 import prisma from './lib/prisma';
 import bcryptjs from 'bcryptjs';
+
+
 
 
 
@@ -14,7 +15,7 @@ export const authConfig :NextAuthConfig = {
     newUser:'/auth/new-account'
   },
   callbacks:{
-    authorized({ auth, request: { nextUrl } }) {
+    authorized({ auth, }) {
       console.log({ auth });
       // const isLoggedIn = !!auth?.user;
 
@@ -33,7 +34,8 @@ export const authConfig :NextAuthConfig = {
       }
       return token
     },
-    session({session,token,user}) {
+    session({session,token}) {
+   
       session.user =token.data as any
       return session
     },
@@ -59,7 +61,7 @@ export const authConfig :NextAuthConfig = {
 
             const {password:_,...rest} = user
 
-
+            
             return rest
         },
       }),

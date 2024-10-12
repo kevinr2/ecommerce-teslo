@@ -144,10 +144,11 @@ export const placeOrder = async (
     }
 
 
-  } catch (error: any) {
+  } catch (error) {
+    console.log(error)
     return {
       ok: false,
-      message: error?.message,
+      message: "error en la orden",
     };
   }
 };
