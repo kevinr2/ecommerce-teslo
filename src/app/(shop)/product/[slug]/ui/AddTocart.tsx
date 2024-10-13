@@ -15,6 +15,7 @@ export const AddTocart = ({ product }: Props) => {
   const [size, setSize] = useState<Size | undefined>();
   const [quantity, setQuantify] = useState<number>(1);
   const [posted, setPosted] = useState(false)
+  const [stockMsg, setStockMsg] = useState(false)
 
   const addTocart = () => {
     setPosted(true)
@@ -26,15 +27,20 @@ export const AddTocart = ({ product }: Props) => {
         price:product.price,
         quantity:quantity,
         size:size,
-        image: product.images[0]
+        image: product.images[0],
+    }
+    
+    if(product.inStock < quantity){
+      setStockMsg(true)
+      return
     }
     addProductToCart(cartProduct)
     setPosted(false)
     setQuantify(1)
     setSize(undefined)
+    setStockMsg(false)
 
   };
-
   return (
     <>
     {
@@ -43,6 +49,14 @@ export const AddTocart = ({ product }: Props) => {
             Debe de Seleccionar una talla*
           </span>
         ))
+    }
+    {
+      stockMsg && (
+      <span className="mt-2 text-red-500 fade-in">
+         pedido mayor a stock en inventario
+      </span>
+      )
+
     }
 
       {/* Selector de Tallas */}

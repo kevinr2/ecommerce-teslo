@@ -148,7 +148,7 @@ export const placeOrder = async (
     console.log(error)
     return {
       ok: false,
-      message: "error en la orden",
+      message: `error en la orden ${error}`,
     };
   }
 };

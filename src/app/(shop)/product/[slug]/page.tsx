@@ -51,7 +51,7 @@ export default async function SlugProducPage( { params }: Props ) {
     notFound();
   }
 
-
+ 
 
   return (
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">

@@ -18,7 +18,7 @@ export interface CartProduct{
   price:number
   quantity: number
   size: Size
-  image: string
+  image: string,
 }
 export interface ProductImage  {
   id: number;
